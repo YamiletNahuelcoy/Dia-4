@@ -43,14 +43,14 @@
             <table class="cel- tablausr-t tablausr-e">
                 <tr>
                     <td>Nombre de Usuario</td>
-                    <td><input type="text" name="txtnombre" id="txtnombre"  /></td>
+                    <td><input type="text" name="nombre" id="nombre"  /></td>
                 </tr>
                 <tr>
                     <td>Contraseña</td>
                     <td> <input type="password" name="passlogin" id="passlogin" /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" id="ingresar" name="ingresar" value="Ingresar" /></td>
+                    <td><input type="submit" id="ingresar" name="ingresar" value="Login" /></td>
                 </tr>
 
             </table>

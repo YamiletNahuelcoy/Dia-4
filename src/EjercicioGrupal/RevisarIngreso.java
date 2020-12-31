@@ -31,8 +31,6 @@ public class RevisarIngreso extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		
 
 	}
 
@@ -43,21 +41,23 @@ public class RevisarIngreso extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		String nombre = (String)request.getParameter("txtnombre");
-		int clave = Integer.parseInt(request.getParameter("passlogin"));
-		if(nombre == "admin" && clave == 1234) {
-			HttpSession misesion = request.getSession();
-			misesion.setAttribute("datonombre", nombre);
-			misesion.setAttribute("datoclave", clave);
-			request.getRequestDispatcher("SesionCreada.jsp").forward(request, response);
-			
-		}
-		else {
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-			
-		}
+		// doGet(request, response);
+
+		String nombre = (String) request.getParameter("nombre");
+		String passlogin = (String) request.getParameter("passlogin");
+		HttpSession session = request.getSession();// iniciando la sesión
+		session.setAttribute("nombresesion", nombre);
+		request.setAttribute("datonombre", nombre);
 		
+		if (nombre.equals("admin") && passlogin.equals("1234")) {
+
+			request.getRequestDispatcher("SesionCreada.jsp").forward(request, response);
+
+		} else {
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+
+		}
+
 	}
 
 }
