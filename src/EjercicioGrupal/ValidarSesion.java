@@ -6,18 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Contacto
+ * Servlet implementation class ValidarSesion
  */
-@WebServlet("/Contacto")
-public class Contacto extends HttpServlet {
+@WebServlet("/ValidarSesion")
+public class ValidarSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Contacto() {
+    public ValidarSesion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,11 +28,7 @@ public class Contacto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		
-		request.getRequestDispatcher("Login.jsp").forward(request, response);
-
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -41,6 +38,32 @@ public class Contacto extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
+		String nombre, pass;
+		nombre = request.getParameter("txtnombre");
+		pass = request.getParameter("txtpass");
+		
+		if(nombre.equalsIgnoreCase("admin")) {
+			if(pass.equalsIgnoreCase("1234")) {
+				/*correcto*/
+				
+				Usuario user = new Usuario(nombre, pass, "Yamilet Ancan Nahuelcoy");
+				HttpSession session = request.getSession();
+				session.setAttribute("usuario", user);
+				
+				request.getRequestDispatcher("SesionCreada").forward(request, response);
+				
+				
+			}else {
+				/*pass incorrecta*/
+				request.getRequestDispatcher("Login.jsp").forward(request, response);
+			}
+			
+			
+		}else {
+			/*nombre incorrecto*/
+			
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+		}
 		
 	}
 

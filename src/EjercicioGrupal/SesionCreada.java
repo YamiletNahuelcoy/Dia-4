@@ -1,6 +1,8 @@
 package EjercicioGrupal;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,17 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.OutputBuffer;
+
 /**
- * Servlet implementation class RevisarIngreso
+ * Servlet implementation class SesionCreada
  */
-@WebServlet("/RevisarIngreso")
-public class RevisarIngreso extends HttpServlet {
+@WebServlet("/SesionCreada")
+public class SesionCreada extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RevisarIngreso() {
+	public SesionCreada() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -30,8 +34,7 @@ public class RevisarIngreso extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -43,19 +46,28 @@ public class RevisarIngreso extends HttpServlet {
 		// TODO Auto-generated method stub
 		// doGet(request, response);
 
-		String nombre = (String) request.getParameter("nombre");
-		String passlogin = (String) request.getParameter("passlogin");
-		HttpSession session = request.getSession();// iniciando la sesión
-		session.setAttribute("nombresesion", nombre);
-		request.setAttribute("datonombre", nombre);
-		
-		if (nombre.equals("admin") && passlogin.equals("1234")) {
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		Usuario user = (Usuario) session.getAttribute("usuario");		
 
-			request.getRequestDispatcher("SesionCreada.jsp").forward(request, response);
-
-		} else {
+		if(user == null) {
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
-
+			
+		}else {
+		out.println("<!DOCTYPE html>");
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title></title>");		
+		out.println("<script src=\"https://code.jquery.com/jquery-3.5.1.min.js\"></script>");
+		out.println("<script src=\"script.js\"></script>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("<h1>Bienvenido" + user.getNombreReal() + "</h1>");
+		out.println("<a href='Contacto'>Servlet Contacto</a>");
+		out.println("<br/>");
+		out.println("<a href='Login.jsp'>Cerrar Sesión</a>");	
+		out.println("</body>");
+		out.println("</html>");
 		}
 
 	}

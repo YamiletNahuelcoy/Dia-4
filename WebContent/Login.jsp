@@ -38,19 +38,19 @@
         </div>
     </header>
 
-    <form class="cmxform" id="loginForm" method="post" action="RevisarIngreso">
+    <form class="cmxform" id="loginForm" method="post" action="ValidarSesion">
         <fieldset class="cel- agrupar-t agrupar-e">
             <table class="cel- tablausr-t tablausr-e">
                 <tr>
                     <td>Nombre de Usuario</td>
-                    <td><input type="text" name="nombre" id="nombre"  /></td>
+                    <td><input type="text" name="txtnombre" placeholder="nombre"  /></td>
                 </tr>
                 <tr>
                     <td>Contraseña</td>
-                    <td> <input type="password" name="passlogin" id="passlogin" /></td>
+                    <td> <input type="password" name="txtpass" placeholder="clave" /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" id="ingresar" name="ingresar" value="Login" /></td>
+                    <td><input type="submit"  value="Iniciar Sesión" /></td>
                 </tr>
 
             </table>
