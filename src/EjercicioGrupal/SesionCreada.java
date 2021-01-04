@@ -1,5 +1,6 @@
 package EjercicioGrupal;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -9,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.connector.OutputBuffer;
 
 /**
  * Servlet implementation class SesionCreada
@@ -34,7 +33,7 @@ public class SesionCreada extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -48,6 +47,7 @@ public class SesionCreada extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
+		
 		Usuario user = (Usuario) session.getAttribute("usuario");		
 
 		if(user == null) {
@@ -57,15 +57,21 @@ public class SesionCreada extends HttpServlet {
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
 		out.println("<head>");
-		out.println("<title></title>");		
+		out.println("<title></title>");				
 		out.println("<script src=\"https://code.jquery.com/jquery-3.5.1.min.js\"></script>");
 		out.println("<script src=\"script.js\"></script>");
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<h1>Bienvenido" + user.getNombreReal() + "</h1>");
-		out.println("<a href='Contacto'>Servlet Contacto</a>");
+		out.println("<a  href='Contacto'>Servlet Contacto</a>");
 		out.println("<br/>");
-		out.println("<a href='Login.jsp'>Cerrar Sesión</a>");	
+		out.println("<a href='Contacto.jsp'>Contacto</a>");
+		out.println("<br/>");
+		out.println("<a href='CrearCapacitacion.jsp'>Crear Capacitación</a>");
+		out.println("<br/>");
+		out.println("<a href='ListarCapacitaciones.jsp'>Listar Capacitaciones</a>");
+		out.println("<br/>");
+		out.println("<a href='CerrarSesion'>Cerrar Sesión</a>");	
 		out.println("</body>");
 		out.println("</html>");
 		}
